@@ -1,26 +1,38 @@
 import React from 'react'
 import Card from '../components/Card'
 import FormGroup from '../components/FormGroup'
+import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 class Login extends React.Component {
 
   state = {
     email: '',
-    password: ''
+    password: '',
+    errorMessage: null,
   }
 
   login = () => {
-    console.log(this.state.email)
-    console.log(this.state.password)
+    axios
+    .post('http://localhost:8081/login',  {
+      email: this.state.email, 
+      password: this.state.password
+    }).then(response => {
+      this.props.history.push('/projects')
+    }).catch(err => {
+      this.setState({errorMessage: 'Usuário inválido'})
+    })
   }
 
   render() {
     return (
-      <div className="container">
         <div className="row">
           <div className="col-md-6" style={{position: 'relative', left: '300px'}}>
             <div className="bs-docs-section">
               <Card title="Login">
+              <div className="row">
+                <span>{this.state.errorMessage}</span>
+              </div>
                 <div className="row">
                   <div className="col-lg-12">
                     <div className="bs-component">
@@ -40,10 +52,9 @@ class Login extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   }
 
 }
 
-export default Login
+export default withRouter( Login)
