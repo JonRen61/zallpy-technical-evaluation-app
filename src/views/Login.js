@@ -18,6 +18,7 @@ class Login extends React.Component {
       email: this.state.email, 
       password: this.state.password
     }).then(response => {
+      localStorage.setItem('user', JSON.stringify({userId: response.data.authenticatedUser.id, email: response.data.authenticatedUser.email, token: response.data.authenticatedUser.token}))
       this.props.history.push('/projects')
     }).catch(err => {
       this.setState({errorMessage: 'Usuário inválido'})
