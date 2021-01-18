@@ -9,5 +9,5 @@ Para efetuar o login na aplicação por favor clique em 'Login' na barra de nave
 
 > Usuários para Login:
 - 'Administrador', 'administrador@zallpy.com', 'adminPass'.
-- 2, 'Programador 1', 'programador1@zallpy.com', 'prog1Pass'.
-- 3, 'Programador 2', 'programador2@Zallpy.com', 'prog2Pass'.
+- 'Programador 1', 'programador1@zallpy.com', 'prog1Pass'.
+- 'Programador 2', 'programador2@Zallpy.com', 'prog2Pass'.
