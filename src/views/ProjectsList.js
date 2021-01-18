@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 import ProjectService from '../services/ProjectServices'
 class ProjectsList extends React.Component {
   
@@ -45,7 +46,7 @@ class ProjectsList extends React.Component {
             <tr>
               <td>{project.name}</td>
               <td>{project.appointedHours}</td>
-              <td>{project.registerDate}</td>
+              <td>{!!project.registerDate ? moment.utc(project.registerDate, 'YYYY-MM-DDThh:mm:ss.fff').format('DD-MM-YYYY') : ''}</td>
               <td><button type="button" class="btn btn-info" onClick={() => this.onClickUpdate(project.id)}>Editar</button></td>
             </tr>
           )}
