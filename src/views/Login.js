@@ -2,7 +2,8 @@ import React from 'react'
 import Card from '../components/Card'
 import FormGroup from '../components/FormGroup'
 import { withRouter } from 'react-router-dom'
-import axios from 'axios'
+
+import UserService from '../services/UserService'
 
 class Login extends React.Component {
 
@@ -12,13 +13,20 @@ class Login extends React.Component {
     errorMessage: null,
   }
 
+  constructor() {
+    super()
+    this.service = new UserService();
+  }
+
   login = () => {
-    axios
-    .post('http://localhost:8081/login',  {
+    this.service.makeLogin({
       email: this.state.email, 
-      password: this.state.password
-    }).then(response => {
-      localStorage.setItem('user', JSON.stringify({userId: response.data.authenticatedUser.id, email: response.data.authenticatedUser.email, token: response.data.authenticatedUser.token}))
+      password: this.state.password})
+    .then(response => {
+      localStorage.setItem('user', JSON.stringify({
+        userId: response.data.authenticatedUser.id, 
+        email: response.data.authenticatedUser.email, 
+        token: response.data.authenticatedUser.token}))
       this.props.history.push('/projects')
     }).catch(err => {
       this.setState({errorMessage: 'Usuário inválido'})
@@ -58,4 +66,4 @@ class Login extends React.Component {
 
 }
 
-export default withRouter( Login)
+export default withRouter(Login)
